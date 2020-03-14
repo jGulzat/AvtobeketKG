@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.RegisterActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/registerTextView"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="100dp"
+                android:text="Регистрация"
+                android:textSize="27sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center">
+            </TextView>
+
+            <ImageView
+                android:id="@+id/profileImageView"
+                android:layout_width="80dp"
+                android:layout_height="60dp"
+                android:layout_below="@+id/registerTextView"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/imageprogile"
+
+                >
+            </ImageView>
+                    <EditText
+                        android:id="@+id/nameEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@id/profileImageView"
+                        android:hint="  Имя"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:layout_gravity="center"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:paddingStart="8dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/round_edittext">
+
+                    </EditText>
+                    <EditText
+                        android:id="@+id/surnameEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="8dp"
+                        android:hint="  Фамилия"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/nameEditText"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_edittext"
+                        >
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/mailEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="8dp"
+                        android:hint=" Почта"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:layout_below="@id/surnameEditText"
+                        android:layout_centerHorizontal="true"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_edittext"
+                        >
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/userNameEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="8dp"
+                        android:hint="  Имя пользователя"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:layout_below="@id/mailEditText"
+                        android:layout_centerHorizontal="true"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_edittext"
+                        >
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="8dp"
+                        android:hint=" Пароль"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:layout_below="@id/userNameEditText"
+                        android:layout_centerHorizontal="true"
+                        android:drawableLeft="@drawable/ic_password"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_edittext"
+                        >
+                    </EditText>
+
+                    <EditText
+                        android:id="@+id/confirmPasswordEditText"
+                        android:layout_width="300dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:paddingStart="8dp"
+                        android:hint=" Повторите пароль"
+                        android:textStyle="normal"
+                        android:textSize="19sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/passwordEditText"
+                        android:layout_marginBottom="25dp"
+                        android:drawableLeft="@drawable/ic_password"
+                        android:layout_gravity="center"
+                        android:background="@drawable/round_edittext"
+                        >
+                    </EditText>
+
+
+            <Button
+                android:id="@+id/registerButton"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/confirmPasswordEditText"
+                android:background="@drawable/round_button"
+                android:text="Зарегистрироваться"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textAlignment="center"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+
+                >
+            </Button>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

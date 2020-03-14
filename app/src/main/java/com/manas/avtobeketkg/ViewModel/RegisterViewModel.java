@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.manas.avtobeketkg.Api.ApiService;
 import com.manas.avtobeketkg.Api.ApiServiceHelper;
 import com.manas.avtobeketkg.Model.User;
 
@@ -14,10 +13,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginViewModel extends ViewModel {
+public class RegisterViewModel  extends ViewModel {
 
-
-    public LoginViewModel() {
+    public RegisterViewModel() {
         super();
     }
 
@@ -27,22 +25,21 @@ public class LoginViewModel extends ViewModel {
         Log.d("######", "onCleared called!");
     }
 
-    public LiveData<User> getLoginResult(String username,String password) {
-        MutableLiveData<User> liveUserResponse;
+    public LiveData<User> getRegisterResult(User user) {
+        MutableLiveData<User> livenewUserResponse;
 
-        User user = new User(username, password);
-        liveUserResponse = new MutableLiveData<>();
+        livenewUserResponse = new MutableLiveData<>();
 
         Call<User> userLoginCall = ApiServiceHelper.getInstance()
-                .getApiService().userLogin(user);
+                .getApiService().userSignUp(user);
         userLoginCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
-                    liveUserResponse.setValue(response.body());
+                    livenewUserResponse.setValue(response.body());
                     Log.d("aaa", "onResponse: " + "succes: " + response.body().getToken());
                 }
-                Log.d("aaa", "onResponse: " + "unsucces: "  + response.body());
+                Log.d("aaa", "onResponse: " + "unsucces: "  + response.code());
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
@@ -54,6 +51,7 @@ public class LoginViewModel extends ViewModel {
 //        } else {
 //            Log.e("@@@@@@@", "Old Data retrieved");
 //        }
-        return liveUserResponse;
+        return livenewUserResponse;
     }
+
 }
