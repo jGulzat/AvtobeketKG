@@ -30,16 +30,17 @@ public class RegisterViewModel  extends ViewModel {
 
         livenewUserResponse = new MutableLiveData<>();
 
-        Call<User> userLoginCall = ApiServiceHelper.getInstance()
-                .getApiService().userSignUp(user);
-        userLoginCall.enqueue(new Callback<User>() {
+        Call<User> newUserCall = ApiServiceHelper.getInstance()
+                .getApiService().createUser(user.getUsername(),user.getEmail(),user.getFirstname(),user.getLast_name(),user.getPassword());
+        newUserCall.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     livenewUserResponse.setValue(response.body());
                     Log.d("aaa", "onResponse: " + "succes: " + response.body().getToken());
                 }
-                Log.d("aaa", "onResponse: " + "unsucces: "  + response.code());
+                Log.d("aaa", "onResponse: " + "unsucces: "  + response.code()
+                        +"\n " + response.errorBody().toString());
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {

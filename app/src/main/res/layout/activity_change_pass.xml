@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.ChangePassActivity">
+    <include layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/changePassTextview"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f3f3f3"
+        android:paddingTop="15dp"
+        android:layout_marginTop="?actionBarSize"
+        android:paddingBottom="10dp"
+        android:text="Изменение пароля"
+        android:textAlignment="center"
+        android:textColor="#a7a7aa"
+        >
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/shadow"
+        android:elevation="10dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/changePassTextview"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/shadow">
+
+
+            <EditText
+                android:id="@+id/oldPassEditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="  Нынешний пароль"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/ic_password"
+                android:layout_gravity="center"
+                android:textStyle="normal"
+                android:textSize="19sp"
+                android:background="@drawable/round_edittext">
+
+            </EditText>
+            <EditText
+                android:paddingStart="8dp"
+                android:id="@+id/newPassEditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:hint="  Новый пароль"
+                android:textStyle="normal"
+                android:textSize="19sp"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/ic_password"
+                android:layout_gravity="center"
+                android:background="@drawable/round_edittext"
+                >
+            </EditText>
+
+            <EditText
+                android:id="@+id/confirmPassEditText"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:paddingStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="16dp"
+                android:hint=" Повторите новый пароль"
+                android:textStyle="normal"
+                android:textSize="19sp"
+                android:padding="8dp"
+                android:drawableLeft="@drawable/ic_password"
+                android:layout_gravity="center"
+                android:background="@drawable/round_edittext"
+                >
+            </EditText>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/changePassButton"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_button"
+        android:text="Изменить"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:onClick="changePassword"
+        android:layout_below="@id/linearLayout1"
+        >
+    </Button>
+
+
+</RelativeLayout>

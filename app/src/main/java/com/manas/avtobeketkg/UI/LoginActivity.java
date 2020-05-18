@@ -4,12 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,17 +19,24 @@ import com.manas.avtobeketkg.R;
 import com.manas.avtobeketkg.ViewModel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences sharedpreferences;
+    public static final String mypreference = "mypref";
+    public static final String Token = "token";
+
     Button loginBtn;
     EditText usernameeditText,passwordEdittext;
-    String token = null;
     String username,password;
     private LoginViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
+        sharedpreferences = getSharedPreferences(mypreference,
+                Context.MODE_PRIVATE);
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         initUI();
@@ -49,8 +56,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 username = usernameeditText.getText().toString();
                 password = passwordEdittext.getText().toString();
-                username = "gulzat";
-                password = "123456789";
+                username = "gulzats";
+                password = "jeenbekova98";
 
                 if(validateData(username,password)){
                     viewModel.getLoginResult(username,password).observe(LoginActivity.this, new Observer<User>() {
@@ -58,9 +65,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onChanged(User user) {
                             if(user.getToken()!=null){
                                 Log.d("TAG", "not null: " + user.getToken());
-                                Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent(LoginActivity.this,RegisterActivity.class);
+                                SharedPreferences.Editor editor = sharedpreferences.edit();
+                                editor.putString(Token, user.getToken());
+                                editor.commit();
+
+                                Intent i = new Intent(LoginActivity.this,NavigationActivity.class);
                                 startActivity(i);
                             }
                         }
@@ -101,5 +112,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    public void RegisterNewUser(View view) {
+        Intent i = new Intent(this,RegisterActivity.class);
+        startActivity(i);
     }
 }

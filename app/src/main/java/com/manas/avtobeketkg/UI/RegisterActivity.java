@@ -47,8 +47,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = paswordEdittext.getText().toString().trim();
                 String confirmPassword = confirmPasswordEdittext.getText().toString().trim();
                 name = "Gulzat";            surname = "Zheenbekova";
-                mail = "gulza97@mail.ru";   username = "gulzat2zhk";
+                mail = "gulza97@mail.ru";   username = "gulzat2zh4";
                 password = "12345678dfk";      confirmPassword = "12345678dfk";
+
 
                 if(validateData(name,surname,username,mail,password,confirmPassword)){
                     User newUser = new User(name,surname,username,password,confirmPassword);

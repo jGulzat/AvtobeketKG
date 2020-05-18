@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Fragments.SearchFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutStation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/shadow"
+        android:elevation="30dp"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/relativelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/fromTextView"
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="From"
+                android:textSize="15sp"
+                android:layout_marginTop="3dp"
+                android:textColor="#FF3F3D3D"
+                >
+            </TextView>
+
+            <AutoCompleteTextView
+                android:id="@+id/fromACTV"
+                android:drawableLeft="@drawable/ic_from_to"
+                android:layout_width="200dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/white"
+                android:layout_below = "@+id/fromTextView"
+                android:textSize="18sp"
+                android:layout_marginStart="8dp"
+                android:completionThreshold="1"
+                >
+
+            </AutoCompleteTextView>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="225dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginStart="18dp"
+                android:layout_below="@+id/fromACTV"
+                android:background="#FF3F3D3D" />
+
+            <TextView
+                android:id="@+id/toTv"
+                android:layout_width="35dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="18dp"
+                android:text="To"
+                android:textSize="15sp"
+                android:layout_below="@+id/view"
+                android:layout_marginTop="5dp"
+                android:textColor="#FF3F3D3D">
+            </TextView>
+
+            <AutoCompleteTextView
+                android:id="@+id/toACTV"
+                android:drawableLeft="@drawable/ic_from_to"
+                android:layout_width="200dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="8dp"
+                android:textSize="18sp"
+                android:layout_below="@+id/toTv"
+                android:background="@color/white">
+
+            </AutoCompleteTextView>
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="57dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_arrows" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_below="@+id/linearLayoutStation"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radiobtn_1"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text=" Туда" />
+
+        <RadioButton
+            android:id="@+id/radiobtn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Туда и обратно" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutCalendar"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/shadow"
+        android:elevation="30dp"
+        android:layout_below="@id/radiogroup"
+        android:orientation="horizontal"
+        >
+        <RelativeLayout
+            android:id="@+id/relativelayoutCPV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shadow">
+
+            <TextView
+                android:id="@+id/datetv"
+                android:layout_width="100dp"
+                android:layout_height="20dp"
+                android:text="Дата поездки"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp">
+
+            </TextView>
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/datetv"
+                android:layout_height="wrap_content">
+                <com.squareup.timessquare.CalendarPickerView
+                    android:id="@+id/calendar_view1"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp"
+                    />
+            </ScrollView>
+
+            <TextView
+                android:id="@+id/currentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+                android:text="Today"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="17sp">
+            </TextView>
+
+            <EditText
+                android:id="@+id/date1EdT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="dd/MM/yyyy"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/currentDate"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/colorPrimary"
+                />
+
+            <EditText
+                android:id="@+id/date2EdT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="dd/MM/yyyy"
+                android:layout_below="@id/date1EdT"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="5dp"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="35dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:text="Искать"
+        android:textColor="@color/white"
+        android:background="@drawable/round_button"
+        android:layout_below="@id/linearLayoutCalendar"
+        >
+    </Button>
+
+
+
+</RelativeLayout>

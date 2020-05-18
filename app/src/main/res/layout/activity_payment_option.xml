@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.PaymentOptionActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:paddingTop="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My"
+            android:textSize="22sp"
+            android:textColor="#fff"
+            android:layout_marginStart = "110dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/white"
+            android:src="@drawable/bustoolbar"
+            android:layout_marginStart="8dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Bus"
+            android:textSize="22sp"
+            android:textColor="#fff"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/progileTextView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f3f3f3"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:text="Личные данные"
+        android:textAlignment="center"
+        android:textColor="#a7a7aa"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        >
+    </TextView>
+    <RelativeLayout
+        android:id="@+id/paymentRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/progileTextView"
+        >
+        <com.braintreepayments.cardform.view.CardForm
+            android:id="@+id/card_form"
+            android:layout_margin="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_below="@id/card_form"
+            android:id="@+id/btnBuy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:background="@drawable/round_button"
+            android:text="Купить сейчас"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+<!--
+
+    <RelativeLayout
+        android:id="@+id/paymentRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@id/progileTextView"
+        >
+        <TextView
+            android:id="@+id/payTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:layout_margin="8dp"
+            android:text="Выберите вариант платежа"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:id="@+id/creditCardTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/payTV"
+            android:layout_margin="8dp"
+            android:text="     Credit Card"
+            android:onClick="choosecard"
+            android:drawableLeft="@drawable/creditcard"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:textColor="#000"
+            />
+        <TextView
+            android:id="@+id/debitCardTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableLeft="@drawable/creditcard"
+            android:layout_below="@+id/creditCardTV"
+            android:layout_margin="8dp"
+            android:text="     Debit Card"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:textColor="#000"
+            android:onClick="choosecard"
+            />
+        <TextView
+            android:id="@+id/netBankingTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/debitCardTV"
+            android:layout_margin="8dp"
+            android:text="      Net Banking"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:drawableLeft="@drawable/netbanking"
+            android:onClick="choosecard"
+            android:textColor="#000"
+            />
+
+        <TextView
+            android:id="@+id/mobileWalletsTV"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@+id/netBankingTV"
+            android:backgroundTint="#000"
+            android:backgroundTintMode="src_over"
+            android:layout_margin="8dp"
+            android:text="       Mobile Wallets"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:textColor="#000"
+            android:paddingTop="8dp"
+            android:onClick="choosecard"
+            android:drawableLeft="@drawable/wallet"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/summaTravel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Сумма платежа"
+        android:gravity="center"
+        android:drawableTint="@color/colorPrimary"
+        app:layout_constraintTop_toBottomOf="@+id/paymentRV"
+        />
+    <TextView
+        android:id="@+id/infoRoute"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:gravity="center"
+        android:text="С Бишкеке до Баетова,  Вторник, 12-декабря  в 8.00"
+        app:layout_constraintTop_toBottomOf="@+id/summaTravel"
+        />
+    
+    <TextView
+        android:id="@+id/summaTV"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_margin="24dp"
+        android:textColor="@color/colorPrimary"
+        android:padding="8dp"
+        android:text="Сумма: 600сом"
+        app:layout_constraintTop_toBottomOf="@+id/infoRoute"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="24dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="Оплатить"
+        android:background="@drawable/round_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+-->

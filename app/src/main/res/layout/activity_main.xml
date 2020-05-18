@@ -12,7 +12,7 @@
         android:layout_height="85dp"
         android:layout_marginStart="9dp"
         android:layout_marginEnd="9dp"
-        android:src="@drawable/ic_bus"
+        android:src="@drawable/ic_busp"
         android:tint="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/textView"

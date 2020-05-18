@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/routeRL"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_rv"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/fromToTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="35dp"
+            android:text="Description"
+            android:textColor="@color/colorPrimary">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/distanceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fromToTV"
+            android:layout_alignStart="@+id/fromToTV"
+            android:layout_alignLeft="@+id/fromToTV"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="Description"
+            android:textColor="@color/colorPrimary">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/timeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/distanceTV"
+            android:layout_alignStart="@+id/distanceTV"
+            android:layout_alignLeft="@+id/distanceTV"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:text="Description"
+            android:textColor="@color/colorPrimary">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/fromToTV"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:text="TextView" />
+
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/timeTV"
+            android:layout_alignBottom="@id/timeTV"
+            android:layout_marginStart="8dp"
+            android:text="TextView" />
+
+        <ImageView
+            android:layout_below="@id/directionTV"
+            android:id="@+id/routeTransport"
+            android:layout_width="36dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:paddingEnd="8dp"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/bus"/>
+        <TextView
+            android:id="@+id/directionTV"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:text="Туда"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="8dp"
+
+            />
+
+        <ImageView
+            android:id="@+id/routeImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@color/colorAccent"
+            android:layout_alignRight="@id/dateTV"
+            android:layout_alignParentBottom="true"
+            android:layout_alignBottom="@id/priceTV"
+            android:src="@drawable/route"
+            />
+        <ImageView
+            android:id="@+id/serviceIV"
+            android:layout_alignBottom="@id/routeImageView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_facebook"
+            android:layout_toLeftOf="@id/routeImageView"
+            android:layout_marginEnd="8dp"
+            />
+        <TextView
+            android:id="@+id/numberSeatsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@id/dateTV"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:text="number"
+            android:layout_below="@id/dateTV"
+
+            />
+
+
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

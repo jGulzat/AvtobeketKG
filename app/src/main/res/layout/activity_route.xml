@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.RouteActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/TextView">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_icon"
+            />
+        <TextView
+            android:id="@+id/routeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:text=" From --> To"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            />
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#f3f3f3"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:text="Маршруты"
+        android:textAlignment="center"
+        android:textColor="#a7a7aa"
+        android:layout_marginTop="?actionBarSize"
+        app:layout_constraintBottom_toTopOf="@id/TextView"
+        />
+    <TextView
+        android:id="@+id/sortTV"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:text="Сортировка"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/TextView"
+        />
+
+    <RadioGroup
+        android:id="@+id/radiogroupSort"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:padding="3dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/sortTV"
+        >
+
+        <RadioButton
+            android:id="@+id/sortPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:clickable="true"
+            android:onClick="onRadioButtonPriceClicked"
+            android:text="по цене"
+            android:textColor="@color/colorPrimary" />
+
+        <RadioButton
+            android:id="@+id/sortTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:onClick="onRadioButtonTimeClicked"
+            android:text="по времени" />
+    </RadioGroup>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeRecycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radiogroupSort"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,9 @@ public class User implements Serializable {
     String username;
     String email;
     String password;
+    String success;
+    String token;
+
 
     public void setFirst_name(String first_name) {
         this.first_name = first_name;
@@ -34,12 +37,6 @@ public class User implements Serializable {
         this.token = token;
     }
 
-    public void setLoginStatus(boolean loginStatus) {
-        this.loginStatus = loginStatus;
-    }
-
-    String token;
-    boolean loginStatus;
 
 
     public User(String username, String password) {
@@ -86,9 +83,7 @@ public class User implements Serializable {
         return token;
     }
 
-    public boolean getLoginStatus() {
-        return loginStatus;
-    }
+
 
 
 

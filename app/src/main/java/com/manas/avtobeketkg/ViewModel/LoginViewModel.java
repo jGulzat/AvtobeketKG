@@ -5,17 +5,13 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.manas.avtobeketkg.Api.ApiService;
 import com.manas.avtobeketkg.Api.ApiServiceHelper;
 import com.manas.avtobeketkg.Model.User;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
-
 
     public LoginViewModel() {
         super();
@@ -42,7 +38,7 @@ public class LoginViewModel extends ViewModel {
                     liveUserResponse.setValue(response.body());
                     Log.d("aaa", "onResponse: " + "succes: " + response.body().getToken());
                 }
-                Log.d("aaa", "onResponse: " + "unsucces: "  + response.body());
+                else Log.d("aaa", "onResponse: " + "unsucces: "  + response.code());
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {

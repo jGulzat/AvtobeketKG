@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Fragments.ProfileFragment">
+
+    <TextView
+        android:id="@+id/progileTextView"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:text="Данные пользователя"
+        android:textAlignment="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="10dp"
+        android:background="#f3f3f3"
+        android:textColor="#a7a7aa"
+        >
+    </TextView>
+
+    <ImageView
+        android:id="@id/profile"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/progileTextView"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/imageprogile">
+    </ImageView>
+    <TextView
+        android:id="@+id/fullnameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/profile"
+        android:text="Жээнбеков Байел"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:paddingTop="10dp"
+        >
+    </TextView>
+    <Button
+        android:id="@+id/MyInfoBtn"
+        android:layout_below="@+id/fullnameTextView"
+        android:text="  Мои данные"
+        android:textColor="#000"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/round_edittext"
+        android:drawableLeft="@drawable/profile"
+        android:drawableTint="@color/colorAccent"
+        android:drawableRight="@drawable/ic_right">
+    </Button>
+
+    <Button
+        android:id="@+id/changePassBtn"
+        android:layout_below="@+id/MyInfoBtn"
+        android:text="  Изменить пароль"
+        android:textColor="#000"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:drawableTint="@color/colorAccent"
+        android:background="@drawable/round_edittext"
+        android:drawableLeft="@drawable/password"
+        android:drawableRight="@drawable/ic_right">
+
+    </Button>
+
+
+    <Button
+        android:id="@+id/historyBTN"
+        android:layout_below="@+id/changePassBtn"
+        android:text="  Мои поездки"
+        android:textColor="#000"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:drawableTint="@color/colorAccent"
+        android:background="@drawable/round_edittext"
+        android:drawableLeft="@drawable/history"
+        android:drawableRight="@drawable/ic_right">
+
+    </Button>
+
+    <Button
+        android:id="@+id/saveCardsBtn"
+        android:layout_below="@+id/historyBTN"
+        android:text="  Сохраненные карты"
+        android:textColor="#000"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:drawableTint="@color/colorAccent"
+        android:background="@drawable/round_edittext"
+        android:drawableLeft="@drawable/credit"
+        android:drawableRight="@drawable/ic_right">
+    </Button>
+    <Button
+        android:id="@+id/logoutBTN"
+        android:layout_below="@+id/saveCardsBtn"
+        android:text="  Logout"
+        android:textColor="#000"
+        android:textStyle="normal"
+        android:textSize="13sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:textAlignment="textStart"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"
+        android:drawableTint="@color/colorAccent"
+        android:background="@drawable/round_edittext"
+        android:drawableLeft="@drawable/logout">
+    </Button>
+
+
+
+</RelativeLayout>
