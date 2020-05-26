@@ -33,7 +33,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/profile"
-        android:text="Жээнбеков Байел"
+        android:text="Фамилия имя"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textAlignment="center"

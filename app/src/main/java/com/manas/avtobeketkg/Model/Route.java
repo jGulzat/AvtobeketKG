@@ -16,6 +16,17 @@ public class Route implements Serializable {
     private List<FoodService>foods;
     private String baggage;
     private String status = "to";
+    private Boolean success;
+    private String message;
+
+    public Boolean getSucces() {
+        return success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     private  Integer numberOfSeats;
     private boolean isSelected = false;
 
@@ -47,36 +58,9 @@ public class Route implements Serializable {
         this.to = to;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public void setArrive_time(String arrive_time) {
-        this.arrive_time = arrive_time;
-    }
-
-    public void setDictance(String dictance) {
-        this.dictance = dictance;
-    }
 
     public void setRoute(List<LatLng> route) {
         this.route = route;
-    }
-
-    public void setTrans_schema(String trans_schema) {
-        this.trans_schema = trans_schema;
-    }
-
-    public void setFoods(List<FoodService> foods) {
-        this.foods = foods;
-    }
-
-    public void setBaggage(String baggage) {
-        this.baggage = baggage;
     }
 
     public void setStatus(String status) {
@@ -97,7 +81,7 @@ public class Route implements Serializable {
 
     public Route(String from, String to, String date, String price,
                  String arrive_time, String dictance, List<LatLng> route, String trans_schema, List<FoodService> foods,
-                 String baggage, Integer numberOfSeats) {
+                 String baggage, Integer numberOfSeats, Boolean success, String message) {
         this.from = from;
         this.to = to;
         this.date = date;
@@ -110,6 +94,8 @@ public class Route implements Serializable {
         this.baggage = baggage;
         this.numberOfSeats = numberOfSeats;
         this.status = "to";
+        this.success = success;
+        this.message = message;
 
     }
 

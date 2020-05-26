@@ -63,12 +63,9 @@ public interface ApiService {
 
     @POST("/api/buy_or_book_places/")
     Call<Answer> buyOrBook(@Header("Authorization") String token, @Body PassengerInfo passenger);
-    /*Call<String> buyOrBook(
-            @Header("Authorization") String token,
-            @Field("trans_id") int id,
-            @Field("places_to_book_or_buy") List<Passenger>passengers,
-            @Field("action") String action
-    );*/
+
+    @POST("/api/roundtrip/")
+    Call<Answer> buyOrBookTO(@Header("Authorization") String token, @Body PassengerInfo passenger);
 
     @PUT("/api/change_pass/")
     Call<Password>changePassword(@Header("Authorization") String token, @Body Password passwords);

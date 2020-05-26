@@ -1,5 +1,6 @@
 package com.manas.avtobeketkg.UI.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,6 +26,7 @@ import com.google.android.gms.common.api.Api;
 import com.manas.avtobeketkg.Api.ApiService;
 import com.manas.avtobeketkg.Model.VokzalInfo;
 import com.manas.avtobeketkg.R;
+import com.manas.avtobeketkg.UI.Route2Activity;
 import com.manas.avtobeketkg.UI.RouteActivity;
 import com.manas.avtobeketkg.UI.VokzalInfoActivity;
 import com.manas.avtobeketkg.ViewModel.SearchViewModel;
@@ -83,16 +87,29 @@ public class HelpFragment extends Fragment implements VokzalAdapter.VokzalListen
         vokzalInfoViewModel = ViewModelProviders.of(requireActivity()).get(VokzalInfoViewModel.class);
 
         logo = v.findViewById(R.id.logo_avtobeket);
-        fillInfo();
 
        return v;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        fillInfo();
+    }
+
     private void fillInfo() {
 
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(getActivity());
+        progressDoalog.setMessage("Its loading....");
+        progressDoalog.setTitle("Stations");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        progressDoalog.show();
         vokzalInfoViewModel.getVokzalInfo("Token " + token).observe(this, new Observer<List<VokzalInfo>>() {
             @Override
             public void onChanged(List<VokzalInfo> vokzalInfos) {
+                progressDoalog.dismiss();
                 vokzalInfoArrayList = (ArrayList<VokzalInfo>) vokzalInfos;
                 vokzalAdapter = new VokzalAdapter(HelpFragment.this,vokzalInfoArrayList,HelpFragment.this);
                 vokzalInfoRV.setAdapter(vokzalAdapter);
@@ -109,6 +126,7 @@ public class HelpFragment extends Fragment implements VokzalAdapter.VokzalListen
         intent.putExtra("name",vokzalInfoArrayList.get(position).getName());
         intent.putExtra("phoneNumber",vokzalInfoArrayList.get(position).getPhoneNumber());
         intent.putExtra("vokzalInfo",vokzalInfoArrayList.get(position).getInfo());
+        intent.putExtra("image",vokzalInfoArrayList.get(position).getImage1());
         startActivity(intent);
     }
 }

@@ -24,6 +24,8 @@ public class VokzalInfo {
         return info;
     }
 
+    public String getImage1() { return image; }
+
     public VokzalInfo(String name, String phoneNumber, int image1, String info) {
         this.name = name;
         this.phoneNumber = phoneNumber;

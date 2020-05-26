@@ -9,7 +9,21 @@ public class User implements Serializable {
     String username;
     String email;
     String password;
-    String success;
+    Boolean success;
+    String message;
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
     String token;
 
 

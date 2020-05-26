@@ -67,6 +67,7 @@ public class HistoryActivity extends AppCompatActivity {
         historyViewModel.getLiveDataHistory("Token " + token).observe(this, new Observer<List<History>>() {
             @Override
             public void onChanged(List<History> histories) {
+                Log.d("TAG", "onChanged: history" + histories.size());
                 historyArrayList = (ArrayList<History>) histories;
                 historyAdapter = new HistoryAdapter(HistoryActivity.this,historyArrayList);
                 historyRecycleView.setAdapter(historyAdapter);

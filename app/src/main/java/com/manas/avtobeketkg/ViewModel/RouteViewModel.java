@@ -1,6 +1,7 @@
 package com.manas.avtobeketkg.ViewModel;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -13,6 +14,7 @@ import com.manas.avtobeketkg.Model.Search;
 import com.manas.avtobeketkg.Model.Stations;
 import com.manas.avtobeketkg.Model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +31,7 @@ public class RouteViewModel extends ViewModel {
     }
 
     public LiveData<List<Route>> getRoute(String token, Search search){
+        ArrayList<Route>route = new ArrayList<>();
 
         MutableLiveData<List<Route>> liveRouteListResponse = new MutableLiveData<>();
 

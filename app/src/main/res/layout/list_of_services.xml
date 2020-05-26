@@ -15,7 +15,6 @@
             android:layout_height="80dp"
             android:layout_margin="16dp"
             android:src="@drawable/profile"
-            android:tint="@color/colorAccent"
             />
         <TextView
             android:id="@+id/serviceNameTV"

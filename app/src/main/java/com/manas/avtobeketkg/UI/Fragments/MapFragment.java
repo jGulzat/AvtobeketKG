@@ -74,7 +74,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     View view;
     private SearchViewModel searchViewModel;
 
-    ArrayList<Marker>markerArrayList = new ArrayList<>();
     Polyline polyline;
     ArrayList<LatLng> latLngs = new ArrayList<>();
     String origin,destination;

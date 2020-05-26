@@ -56,6 +56,10 @@ public class ServiceActivity extends AppCompatActivity {
         serviceAdapter = new ServiceAdapter(this,foodService);
         serviceRecyclerView.setAdapter(serviceAdapter);
 
-        baggageTV.setText(baggage);
+        baggageTV.setText("В каждом автобусе есть много места для багажа." +
+                "Чтобы сделать вашу поездку максимально комфортной, мы просим вас соблюдать несколько правил. " +
+                "\n" +
+                "Билет дает возможность БЕСПЛАТНО провозить: \nОдно место ручной клади\nОдно место сдаваемого багажа\n" +
+                "А также вы можете взять с собой 1 сверхнормативный багаж на каждого пассажира.\n Стоимость сверхнормативный багажа: " + baggage);
     }
 }

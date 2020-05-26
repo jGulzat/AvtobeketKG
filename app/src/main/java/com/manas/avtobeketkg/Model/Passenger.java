@@ -9,23 +9,20 @@ public class Passenger extends Throwable implements Serializable {
     Integer place_number;
     String S_code;
 
-
     public Passenger(int number, int place_number) {
         this.number = number;
         this.place_number = place_number;
     }
-    public Passenger(String user_name, String user_email) {
+    public Passenger(Integer place_number, String user_name, String user_email) {
+        this.place_number = place_number;
         this.user_name = user_name;
         this.user_email = user_email;
     }
 
 
-    public Passenger(String email, String fullname, int place_number,String s_code) {
+    public Passenger(String email, String user_name) {
         this.user_email = email;
-        this.user_name = fullname;
-        this.place_number = place_number;
-        this.S_code = s_code;
-
+        this.user_name = user_name;
     }
 
     public String getEmail() {

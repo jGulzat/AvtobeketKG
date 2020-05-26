@@ -17,17 +17,6 @@
             android:layout_centerHorizontal="true"
             android:src="@drawable/logo_avtobeket"
             />
-        <TextView
-            android:layout_below="@id/list_of_vokzal"
-            android:id="@+id/txtProgressPercent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Downloaded 0%"
-            android:textColor="@color/colorAccent"
-            android:textStyle="bold"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Display1"
-            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_of_vokzal"
             android:layout_below="@id/logo_avtobeket"
@@ -37,16 +26,7 @@
             android:scrollbars="vertical"
             android:scrollbarStyle="outsideInset"
             />
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_below="@id/txtProgressPercent"
-           />
+
 
     </RelativeLayout>
 </FrameLayout>

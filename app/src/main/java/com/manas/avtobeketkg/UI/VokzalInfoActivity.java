@@ -11,15 +11,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.manas.avtobeketkg.R;
+import com.squareup.picasso.Picasso;
 
 public class VokzalInfoActivity extends AppCompatActivity {
 
-    String vokzalName, phoneNumber, vokzalInfo;
+    String vokzalName, phoneNumber, vokzalInfo,image;
     TextView vokzalNameTV, phoneNumberTV, vokzalInfoTV;
     Button callBtn;
+    ImageView vokzalImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class VokzalInfoActivity extends AppCompatActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         vokzalName = intent.getStringExtra("name");
         vokzalInfo = intent.getStringExtra("vokzalInfo");
+        image = intent.getStringExtra("image");
+
 
 
         initUI();
@@ -39,7 +44,11 @@ public class VokzalInfoActivity extends AppCompatActivity {
         vokzalNameTV = findViewById(R.id.vokzalNameTV);
         vokzalInfoTV = findViewById(R.id.vokzalInfoTV);
         phoneNumberTV = findViewById(R.id.phoneNumberTV);
+        vokzalImage = findViewById(R.id.vokzalIV);
         callBtn = findViewById(R.id.callBtn);
+
+        Picasso.with(vokzalImage.getContext()).load("https://avtobeketkg.herokuapp.com" + image)
+                .into(vokzalImage);
 
         phoneNumberTV.setText(phoneNumber);
         vokzalNameTV.setText(vokzalName);

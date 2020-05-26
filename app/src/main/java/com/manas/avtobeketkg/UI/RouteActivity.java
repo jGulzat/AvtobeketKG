@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.api.Api;
 import com.manas.avtobeketkg.MainActivity;
@@ -29,9 +30,14 @@ import com.manas.avtobeketkg.adapter.RoutesAdapter;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class RouteActivity extends AppCompatActivity implements RoutesAdapter.OnRouteListener, Serializable {
@@ -44,12 +50,14 @@ public class RouteActivity extends AppCompatActivity implements RoutesAdapter.On
     RoutesAdapter routesAdapter;
     ArrayList<Route> routes = new ArrayList<>();
     RouteViewModel routeViewModel;
-    String date,token,routeWay;
+    String date, token, routeWay,datePrevS, dateNextS;
     int from,to,count = 0;
     Search search;
     RadioButton sortPrice, sortTime;
     TextView routeTV;
-
+    Date currentDate, prevDate,nextDate;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Calendar cal1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,13 +69,14 @@ public class RouteActivity extends AppCompatActivity implements RoutesAdapter.On
            token = sharedpreferences.getString(Token,""); }
 
         Intent intent = getIntent();
-        from = intent.getIntExtra  ("from",0);
+        from = intent.getIntExtra("from",0);
         to = intent.getIntExtra("to",0);
         date = intent.getStringExtra("date");
-        routes.clear();
+       // date = "2020-05-27";
+
 
         Log.d("TAG", "onCreate:getIntentrouteACtivity: " + from + "\n" + to + "\n" + date + "\n" + token );
-        search = new Search(4,3,"2020-04-20");
+        search = new Search(from,to,date);
 
 
 
@@ -89,37 +98,47 @@ public class RouteActivity extends AppCompatActivity implements RoutesAdapter.On
         routeList();
     }
 
-    public void routeList(){
+    public void routeList() {
         routesRecycleView = findViewById(R.id.routeRecycleView);
         routesRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        cal1 = Calendar.getInstance();
 
+        try {
+            currentDate = dateFormat.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        getRouteQuery(date);
+    }
+
+    private void getRouteQuery(String date) {
+        search = new Search(from,to,date);
+        routes.clear();
         final ProgressDialog progressDoalog;
         progressDoalog = new ProgressDialog(RouteActivity.this);
         progressDoalog.setMessage("Its loading....");
         progressDoalog.setTitle("Routes");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        // show it
         progressDoalog.show();
         routeViewModel.getRoute("Token " + token,search).observe(this, new Observer<List<Route>>() {
             @Override
             public void onChanged(List<Route> routes1) {
-                Log.d("TAG", "not null: " + routes1.get(0).getFrom());
+
                 progressDoalog.dismiss();
-                routeWay = routes1.get(0).getFrom() + " --> " + routes1.get(0).getTo();
-                setStatus((ArrayList<Route>) routes1,"to");
-                routeTV.setText(routeWay);
-                Log.d("TAG", "onChanged: " + routes.get(0).getTrans_schema() + "\n" + routes);
-                routesAdapter = new RoutesAdapter(RouteActivity.this,routes,RouteActivity.this);
-                routesRecycleView.setAdapter(routesAdapter);
+                if(routes1.get(0).getSucces()){
+                    routeWay = routes1.get(0).getFrom() + " --> " + routes1.get(0).getTo();
+                    setStatus((ArrayList<Route>) routes1,"to");
+                    routeTV.setText(routeWay);
+                    Log.d("TAG", "onChanged: " + routes.get(0).getTrans_schema() + "\n" + routes);
+                    routesAdapter = new RoutesAdapter(RouteActivity.this,routes,RouteActivity.this);
+                    routesRecycleView.setAdapter(routesAdapter);
+                }
+                else
+                    Toast.makeText(getBaseContext(), routes1.get(0).getMessage(), Toast.LENGTH_SHORT).show();
+
             }
         });
-        /*routes.add(new Route("vhfbv","vfvvf","700 сом","6ч.25 мин"));
-        routes.add(new Route("vhfbv","vfvvf","500 сом","6ч.29 мин"));
-        routes.add(new Route("vhfbv","vfvvf","400 сом","6ч.35 мин"));
-        routes.add(new Route("vhfbv","vfvvf","600 сом","6ч.20 мин"));*/
-
-
-
     }
 
     private void setStatus(ArrayList<Route>route, String nav) {
@@ -193,5 +212,30 @@ public class RouteActivity extends AppCompatActivity implements RoutesAdapter.On
             }
         });
         routesAdapter.notifyDataSetChanged();
+    }
+
+    public void routesPrevios(View view) throws ParseException {
+
+        cal1.setTime(currentDate);
+        cal1.add(Calendar.DAY_OF_YEAR, -1);
+        prevDate = cal1.getTime();
+
+        datePrevS = dateFormat.format(prevDate);
+        getRouteQuery(datePrevS);
+        Log.d("TAG", "routesPrevious: " + datePrevS);
+        currentDate = prevDate;
+
+
+    }
+
+    public void routesNext(View view) throws ParseException {
+        cal1.setTime(currentDate);
+        cal1.add(Calendar.DAY_OF_YEAR, + 1);
+        nextDate = cal1.getTime();
+        dateNextS = dateFormat.format(nextDate);
+        getRouteQuery(dateNextS);
+        Log.d("TAG", "routesNext: " + dateNextS);
+        currentDate = nextDate;
+
     }
 }

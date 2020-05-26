@@ -67,8 +67,6 @@ public class ChooseSeatActivity extends AppCompatActivity implements View.OnClic
     List<TextView> seatViewList = new ArrayList<>();
     int seatSize = 100;
     int seatGaping = 5;
-
-    int status = 0;
     int STATUS_AVAILABLE = 1;
     int STATUS_BOOKED = 2;
     int STATUS_RESERVED = 3;
@@ -89,7 +87,7 @@ public class ChooseSeatActivity extends AppCompatActivity implements View.OnClic
          selectedsets.clear();
          selectedIds = "";
 
-        Log.d("TAG", "onCreate: transshema: " + seats + "\nid: " + routeId + "\nway: " + routeway);
+        Log.d("TAG", "onCreate: transshema: " + seats + "\nid: " + routeId + "\nway: " + routeway + "\nprice: " + price);
 
 
         wayTV = findViewById(R.id.routeWay);

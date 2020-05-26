@@ -7,11 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".UI.RouteActivity">
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/routeToolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/TextView">
+        app:layout_constraintBottom_toTopOf="@id/routeRL">
         <ImageView
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -24,22 +25,49 @@
             android:layout_marginStart="30dp"
             android:text=" From --> To"
             android:textColor="#fff"
-            android:textSize="22sp"
+            android:textSize="20sp"
             />
     </androidx.appcompat.widget.Toolbar>
-    <TextView
-        android:id="@+id/TextView"
+    <RelativeLayout
+        android:id="@+id/routeRL"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="#f3f3f3"
-        android:paddingTop="15dp"
-        android:paddingBottom="10dp"
-        android:text="Маршруты"
-        android:textAlignment="center"
-        android:textColor="#a7a7aa"
-        android:layout_marginTop="?actionBarSize"
-        app:layout_constraintBottom_toTopOf="@id/TextView"
-        />
+        android:layout_height="40dp"
+        app:layout_constraintTop_toBottomOf="@id/routeToolbar"
+        >
+        <TextView
+            android:id="@+id/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#f3f3f3"
+            android:gravity="center"
+            android:text="Маршруты"
+            android:layout_centerVertical="true"
+            android:textAlignment="center"
+            android:textColor="#a7a7aa" />
+        <Button
+            android:id="@+id/routePrev"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/routeprev"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_alignParentLeft="true"
+            android:onClick="routesPrevios"
+            />
+        <Button
+            android:id="@+id/routeNext"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/routenext"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:onClick="routesNext"
+            />
+    </RelativeLayout>
     <TextView
         android:id="@+id/sortTV"
         android:layout_width="match_parent"
@@ -47,7 +75,7 @@
         android:layout_marginTop="3dp"
         android:text="Сортировка"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/TextView"
+        app:layout_constraintTop_toBottomOf="@id/routeRL"
         />
 
     <RadioGroup
@@ -79,14 +107,19 @@
             android:text="по времени" />
     </RadioGroup>
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/routeRecycleView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/radiogroupSort"
-        >
+        android:layout_height="450dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/radiogroupSort">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routeRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    </ScrollView>
 
-    </androidx.recyclerview.widget.RecyclerView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/routeRL"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="130dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_rv"
@@ -24,10 +24,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="35dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_toLeftOf="@id/dateTV"
+
             android:text="Description"
             android:textColor="@color/colorPrimary">
 
@@ -40,8 +41,9 @@
             android:layout_below="@+id/fromToTV"
             android:layout_alignStart="@+id/fromToTV"
             android:layout_alignLeft="@+id/fromToTV"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_toRightOf="@id/numberSeatsTV"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Description"
             android:textColor="@color/colorPrimary">
 
@@ -54,8 +56,8 @@
             android:layout_below="@+id/distanceTV"
             android:layout_alignStart="@+id/distanceTV"
             android:layout_alignLeft="@+id/distanceTV"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="Description"
             android:textColor="@color/colorPrimary">
 
@@ -68,7 +70,8 @@
             android:layout_alignBottom="@+id/fromToTV"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignTop="@id/fromToTV"
             android:text="TextView" />
 
 
@@ -78,6 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/timeTV"
             android:layout_alignBottom="@id/timeTV"
+            android:layout_alignTop="@id/timeTV"
             android:layout_marginStart="8dp"
             android:text="TextView" />
 
@@ -86,17 +90,17 @@
             android:id="@+id/routeTransport"
             android:layout_width="36dp"
             android:layout_height="32dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_alignTop="@id/fromToTV"
+            android:layout_alignLeft="@id/directionTV"
             android:paddingEnd="8dp"
             android:tint="@color/colorAccent"
             android:src="@drawable/bus"/>
         <TextView
             android:id="@+id/directionTV"
             android:layout_width="wrap_content"
-            android:layout_height="16dp"
+            android:layout_height="20dp"
             android:text="Туда"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
 
             />
@@ -108,12 +112,12 @@
             android:tint="@color/colorAccent"
             android:layout_alignRight="@id/dateTV"
             android:layout_alignParentBottom="true"
-            android:layout_alignBottom="@id/priceTV"
+            android:layout_alignTop="@id/priceTV"
             android:src="@drawable/route"
             />
         <ImageView
             android:id="@+id/serviceIV"
-            android:layout_alignBottom="@id/routeImageView"
+            android:layout_alignTop="@id/routeImageView"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_facebook"
@@ -127,10 +131,10 @@
             android:layout_alignParentEnd="true"
             android:layout_alignLeft="@id/dateTV"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="number"
             android:layout_below="@id/dateTV"
+            android:layout_marginTop="8dp"
 
             />
 

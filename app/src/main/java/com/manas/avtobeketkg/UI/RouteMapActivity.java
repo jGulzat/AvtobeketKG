@@ -50,16 +50,12 @@ import java.util.List;
 public class RouteMapActivity extends AppCompatActivity implements OnMapReadyCallback, TaskLoadedCallback {
 
     private GoogleMap mMap;
-    private MarkerOptions place1, place2,placeS,placeE,place;
+    private MarkerOptions place1, place2;
 
     Button getDirection;
-    String token;
-    List<Integer>stationM;
-    private Polyline currentPolyline;
+  private Polyline currentPolyline;
     RouteViewModel routeViewModel1;
     Route routemap;
-    ArrayList<Stations> stations = new ArrayList<>();
-
     ArrayList<LatLng> markerPoints;
 
     @Override
@@ -93,31 +89,16 @@ public class RouteMapActivity extends AppCompatActivity implements OnMapReadyCal
                 .findFragmentById(R.id.mapNearBy);
         mapFragment.getMapAsync(this);
 
-        getDirection.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new FetchURL(RouteMapActivity.this)
-                        .execute(getUrl(place1.getPosition(),place2.getPosition(),"driving"), "driving");
-
-
-            }
-        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-     //   fillStation();
+
+        new FetchURL(RouteMapActivity.this)
+                .execute(getUrl(place1.getPosition(),place2.getPosition(),"driving"), "driving");
+
     }
-   /* public void fillStation(){
-        routeViewModel1.getListStations(token).observe(this, new Observer<List<Stations>>() {
-            @Override
-            public void onChanged(List<Stations> stations1) {
-                stations = new ArrayList<>(stations1);
-                Log.d("TAG", "stations not null: " + stations.get(0).getName() + " stations1: " + stations1.get(0).getName());
-            }
-        });
-    }*/
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

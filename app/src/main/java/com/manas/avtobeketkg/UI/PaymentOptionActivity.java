@@ -15,18 +15,13 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.braintreepayments.cardform.view.CardForm;
-import com.manas.avtobeketkg.MainActivity;
 import com.manas.avtobeketkg.Model.Answer;
-import com.manas.avtobeketkg.Model.Passenger;
 import com.manas.avtobeketkg.Model.PassengerInfo;
 import com.manas.avtobeketkg.R;
 import com.manas.avtobeketkg.ViewModel.PaymentViewModel;
-
-import java.util.ArrayList;
 
 public class PaymentOptionActivity extends AppCompatActivity {
 
@@ -35,7 +30,6 @@ public class PaymentOptionActivity extends AppCompatActivity {
     public static final String Token = "token";
 
     PassengerInfo passengerInfo;
-    TextView infoRoute,summaTv;
     String routeway, token;
     int size;
     PaymentViewModel paymentViewModel;
@@ -56,17 +50,21 @@ public class PaymentOptionActivity extends AppCompatActivity {
         {  Log.d("RouteActivity", "run: tokennnnnnnnnnn" + sharedpreferences.getString(Token, ""));
             token = sharedpreferences.getString(Token,""); }
 
-        size = passengerInfo.getPlaces_to_book_or_buy().size();
-        Log.d("TAG", "onCreate: " + passengerInfo.getAction()
-         + "\nfullname:  " + passengerInfo.getPlaces_to_book_or_buy().get(0).getFullname());
+
+        Log.d("TAG", "onCreate: " + passengerInfo);
+
+        size = passengerInfo.getPassengers().size();
+       // Log.d("TAG", "onCreate: " + passengerInfo.getAction()
+         //+ "\nfullname:  " + passengerInfo.getPlaces_to_book_or_buy().get(0).getFullname());
         paymentViewModel = ViewModelProviders.of(this).get(PaymentViewModel.class);
 
-        /*infoRoute = findViewById(R.id.infoRoute);
-        summaTv = findViewById(R.id.summaTV);
-        summaTv.setText("Сумма: " + 500*size + " сом");
-        infoRoute.setText(routeway + " на " + size  + " человека ");*/
-
         initUI();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 
@@ -107,13 +105,37 @@ public class PaymentOptionActivity extends AppCompatActivity {
                             progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             // show it
                             progressDoalog.show();
-                            paymentViewModel.buyOrBook("Token " + token, passengerInfo)
+                            if(passengerInfo.getO_RouteId() != null){
+                                paymentViewModel.buyOrBookTO("Token " + token, passengerInfo)
+                                        .observe(PaymentOptionActivity.this, new Observer<Answer>() {
+                                            @Override
+                                            public void onChanged(Answer answer) {
+                                                progressDoalog.dismiss();
+                                                if(answer.getStatus().equals("add")){
+                                                    Toast.makeText(PaymentOptionActivity.this,
+                                                            "Платеж успешно проведен!\n" +
+                                                                    "Для получения подробной информации,смотрите историю. ", Toast.LENGTH_LONG).show();
+                                                }
+                                                Intent intent = new Intent(PaymentOptionActivity.this, Route2Activity.class);
+                                                startActivity(intent);
+                                            }
+                                        });
+                            }
+                            else {  paymentViewModel.buyOrBook("Token " + token, passengerInfo)
                                     .observe(PaymentOptionActivity.this, new Observer<Answer>() {
-                                @Override
-                                public void onChanged(Answer answer) {
+                                        @Override
+                                        public void onChanged(Answer answer) {
+                                            progressDoalog.dismiss();
+                                           if(answer.getStatus().equals("add")){
+                                               Toast.makeText(PaymentOptionActivity.this,
+                                                       "Платеж успешно проведен!\nДля получения подробной информации,смотрите историю.", Toast.LENGTH_LONG).show();
+                                               Intent intent = new Intent(PaymentOptionActivity.this, RouteActivity.class);
+                                               startActivity(intent);
+                                           }
+                                        }
+                                    });
 
-                                }
-                            });
+                            }
 
                         }
                     });
@@ -133,7 +155,4 @@ public class PaymentOptionActivity extends AppCompatActivity {
         });
     }
 
-    public void choosecard(View view) {
-        Toast.makeText(this,"Credit card",Toast.LENGTH_SHORT).show();
-    }
 }

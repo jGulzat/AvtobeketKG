@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,14 +34,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PassengersDataActivity extends AppCompatActivity {
 
     SharedPreferences sharedpreferences;
     public static final String mypreference = "mypref";
     public static final String Token = "token";
-    public static final String Date = "date";
 
     RecyclerView passengerdataRecycleView;
     PassengerAdapter passengerAdapter;
@@ -48,12 +51,16 @@ public class PassengersDataActivity extends AppCompatActivity {
 
     Set<Integer>selectedseats = new HashSet<>();
     Button payBtn;
-    int routeIdTo, routeIdBack, passengerNumber;
-    String action,token,routeway,price;
+    Integer routeIdTo, routeIdBack, passengerNumber;
+    String action,token,routeway,price,price2;
     private PaymentViewModel viewModel;
     TextView infoTV;
-    String date2;
     PassengerInfo passengerInfo;
+    ArrayList<Passenger> pass = new ArrayList<>();
+    Matcher m1,m2;
+    int priceI, priceI2;
+    Pattern p;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +70,6 @@ public class PassengersDataActivity extends AppCompatActivity {
         if (sharedpreferences.contains(Token))
         { Log.d("TAG", "run: tokennnnnnnnnnn" + sharedpreferences.getString(Token, ""));
           token = sharedpreferences.getString(Token,"");
-        }
-        if(sharedpreferences.contains(Date))
-        {
-            Log.d("TAG", "onCreate: date" + sharedpreferences.getString(Date, ""));
-            date2 = sharedpreferences.getString(Date,"");
         }
 
         viewModel = ViewModelProviders.of(this).get(PaymentViewModel.class);
@@ -86,6 +88,11 @@ public class PassengersDataActivity extends AppCompatActivity {
         action = intent.getStringExtra("action");
         routeway = intent.getStringExtra("routeWay");
         price = intent.getStringExtra("price");
+        price2 = intent.getStringExtra("price2");
+        p = Pattern.compile("\\d+");
+        convert();
+
+        Log.d("TAG", "init: m price:" + m1 + "\nprice: " + price);
         passengerNumber = intent.getIntExtra("passengerNumber",0);
         if(passengerNumber == 0) {
             selectedseats = (Set<Integer>) intent.getSerializableExtra("selectedseats");
@@ -114,11 +121,25 @@ public class PassengersDataActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("TAG", "onClick: action: " + action);
-
                   initAlertDialog(action);
             }
         });
 
+    }
+
+    private void convert() {
+        m1 = p.matcher(price);
+        while(m1.find()) {
+            priceI = Integer.parseInt (m1.group());
+            System.out.println(m1.group());
+        }
+        if(price2 != null){
+            m2 = p.matcher(price2);
+            while(m2.find()) {
+                priceI2 = Integer.parseInt (m2.group());
+                System.out.println(m2.group());
+            }
+        }
     }
 
     public void initAlertDialog(String action){
@@ -138,14 +159,15 @@ public class PassengersDataActivity extends AppCompatActivity {
         {
             if(passengerNumber == 0) info += "\nPassenger "+ (i+1) + "\nИмя: "
                     + passengersArrayList.get(i).getFullname() + "\nemail:"
-                    + passengersArrayList.get(i).getEmail() + "\n";
-            else  info += "\nPassenger "+ (i+1) + "\nИмя: "
-                    + passengersArrayList.get(i).getFullname() + "\nemail:"
                     + passengersArrayList.get(i).getEmail() + "\nМесто №"
                     + passengersArrayList.get(i).getPlace_number() + "\n";
+            else info += "\nPassenger "+ (i+1) + "\nИмя: "
+                    + passengersArrayList.get(i).getFullname() + "\nemail:"
+                    + passengersArrayList.get(i).getEmail() + "\n";
         }
         infoTV.setText(info);
-        summaTV.setText("Сумма: " + 500*passengersArrayList.size());
+        int sum = priceI*(passengersArrayList.size()) + priceI2*(passengersArrayList.size());
+        summaTV.setText("Сумма: "  + sum);
         alert.setView(alertLayout);
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
@@ -157,16 +179,13 @@ public class PassengersDataActivity extends AppCompatActivity {
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                pass.add(new Passenger("gulzat", "gulzat@mail.ru"));
+
                 if(passengerNumber == 0)  passengerInfo = new PassengerInfo(routeIdTo,passengersArrayList,action);
-                else   passengerInfo = new PassengerInfo(routeIdTo,routeIdBack,passengersArrayList,action);
+                else   passengerInfo = new PassengerInfo(routeIdTo,routeIdBack,action,passengersArrayList);
                 if(action.equals("B")){
-                    viewModel.buyOrBook(token,passengerInfo).observe(PassengersDataActivity.this, new Observer<Answer>() {
-                        @Override
-                        public void onChanged(Answer answer) {
-                            Log.d("TAG", "onChanged:answer:  " );
-                            Toast.makeText(getBaseContext(), "Билеты успешно забранированы", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    queryBuyOrBook();
+
                 } else if(action.equals("S")){
                     Intent intent  = new Intent(PassengersDataActivity.this, PaymentOptionActivity.class);
                     intent.putExtra("passengerInfo", passengerInfo);
@@ -181,7 +200,37 @@ public class PassengersDataActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    public void query(){
-
+    private void queryBuyOrBook() {
+        final ProgressDialog progressDoalog;
+        progressDoalog = new ProgressDialog(PassengersDataActivity.this);
+        progressDoalog.setMessage("Its loading....");
+        progressDoalog.setTitle("Бронирование");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        // show it
+        progressDoalog.show();
+        if(passengerInfo.getO_RouteId() != null){
+            viewModel.buyOrBookTO("Token " + token,passengerInfo).observe(PassengersDataActivity.this, new Observer<Answer>() {
+                @Override
+                public void onChanged(Answer answer) {
+                    if (answer.getStatus().equals("add")) {
+                        progressDoalog.dismiss();
+                        Toast.makeText(getBaseContext(), "Билеты успешно забранированы!\n" +
+                                "Для получения подробной информации,смотрите историю.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }else {
+            viewModel.buyOrBook("Token " + token,passengerInfo).observe(PassengersDataActivity.this, new Observer<Answer>() {
+                @Override
+                public void onChanged(Answer answer) {
+                    if (answer.getStatus().equals("add")) {
+                        progressDoalog.dismiss();
+                        Toast.makeText(getBaseContext(), "Билеты успешно забранированы!\n" +
+                                "Для получения подробной информации,смотрите историю.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
+
 }

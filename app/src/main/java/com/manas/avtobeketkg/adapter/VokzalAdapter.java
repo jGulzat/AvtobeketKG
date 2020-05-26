@@ -71,9 +71,9 @@ public class VokzalAdapter  extends RecyclerView.Adapter<VokzalAdapter.VokzalVie
         {
             nameTV.setText(vokzalInfo.get(position).getName());
             adressTV.setText(vokzalInfo.get(position).getPhoneNumber());
-            vokzalImage.setImageResource(vokzalInfo.get(position).getImage());
-            Picasso.with(vokzalImage.getContext()).load("https://avtobeketkg.herokuapp.com/" + "media/img/k1.jpg")
-                    .resize(130, 100).into(vokzalImage);
+           // vokzalImage.setImageResource(vokzalInfo.get(position).getImage());
+            Picasso.with(vokzalImage.getContext()).load("https://avtobeketkg.herokuapp.com" + vokzalInfo.get(position).getImage1())
+                    .into(vokzalImage);
 
         }
 

@@ -20,12 +20,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.common.api.Api;
-import com.manas.avtobeketkg.Model.Search;
 import com.manas.avtobeketkg.R;
 import com.manas.avtobeketkg.UI.Route2Activity;
 import com.manas.avtobeketkg.UI.RouteActivity;
@@ -49,33 +46,29 @@ public class SearchFragment extends Fragment {
     public SearchFragment() {
         // Required empty public constructor
     }
-    SharedPreferences sharedpreferences;
+
+    public SharedPreferences sharedpreferences;
     public static final String mypreference = "mypref";
     public static final String Token = "token";
-    public static final String Date = "date";
-
 
     private SearchViewModel searchViewModel;
-    Date today;
-    Calendar nextYear;
-    EditText date1Edittext, date2Edittext;
-    TextView dateTextView;
-    AutoCompleteTextView fromAutoCompleteTextView, toAutoCompleteTextView;
-    Button searchBtn;
-    String fromStation,toStation;
-    String date1, date2;
-    View v;
-    String token;
-    CalendarPickerView calendar_view;
-   // ArrayList<Stations> stations= new ArrayList<>();
-    RadioGroup rg;
+    private Date today;
+    private Calendar nextYear;
+    private EditText date1Edittext, date2Edittext;
+    private TextView dateTextView;
+    private AutoCompleteTextView fromAutoCompleteTextView, toAutoCompleteTextView;
+    private Button searchBtn;
+    private String fromStation,toStation;
+    private String date1, date2;
+    private View v;
+    private String token;
+    private CalendarPickerView calendar_view;
     RelativeLayout relativeLayoutcpv;
-    RadioButton radioButton1, radioButton2;
-    List<Date> selecteddates;
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    List<Stations> stations1;
-    Search search;
-    String routeWay;
+    private RadioButton radioButton1, radioButton2;
+    private List<Date> selecteddates;
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    private List<Stations> stations1;
+    private String routeWay;
 
 
     @Override
@@ -124,7 +117,6 @@ public class SearchFragment extends Fragment {
     }
 
     public void initUI(){
-        rg = v.findViewById(R.id.radiogroup);
         relativeLayoutcpv = v.findViewById(R.id.relativelayoutCPV);
         radioButton1 = v.findViewById(R.id.radiobtn_1);
         radioButton2 = v.findViewById(R.id.radiobtn_2);
@@ -176,8 +168,6 @@ public class SearchFragment extends Fragment {
         fromStation = fromAutoCompleteTextView.getText().toString();
         toStation = toAutoCompleteTextView.getText().toString();
 
-        Log.d(TAG, "searchRoute: station name:  " + fromStation +"\n" + toStation +
-                "\ndate1: " + date1 + "\ndate2: " + date2  +"\nposition");
         int fromId = 0, toId = 0;
 
         if(!(fromStation.isEmpty() && toStation.isEmpty())){
@@ -189,7 +179,6 @@ public class SearchFragment extends Fragment {
                 {   if(stations1.get(i).getName().equals(fromStation) ) fromId = stations1.get(i).getId();
                     if(stations1.get(i).getName().equals(toStation)) toId = stations1.get(i).getId();
                 }
-                // search = new Search(fromId,toId,date1);
                 Intent i = new Intent(getActivity(), RouteActivity.class);
                 i.putExtra("routeway", routeWay);
                 i.putExtra("from", fromId);
@@ -198,11 +187,11 @@ public class SearchFragment extends Fragment {
                 startActivity(i);
             }
             else if(date1 != null && date2 != null){
-                Log.d(TAG, "searchRoute: " + "date2");
 
-                SharedPreferences.Editor editor = sharedpreferences.edit();
-                editor.putString(Date, date2);
-                editor.commit();
+                for(int i = 0; i < stations1.size(); i++ )
+                {   if(stations1.get(i).getName().equals(fromStation) ) fromId = stations1.get(i).getId();
+                    if(stations1.get(i).getName().equals(toStation)) toId = stations1.get(i).getId();
+                }
                 Intent intent = new Intent(getContext(), Route2Activity.class);
                 intent.putExtra("routeWay", routeWay);
                 intent.putExtra("from", fromId);
@@ -216,6 +205,7 @@ public class SearchFragment extends Fragment {
     }
 
     public void OnRadioButton1Clicked(){
+        date2 = null; date1 = null;
         Log.d(TAG, "OnRadioButton1Clicked: " + "worked");
         date2Edittext.setVisibility(View.GONE);
         date1Edittext.getText().clear();
@@ -229,7 +219,6 @@ public class SearchFragment extends Fragment {
                 date1Edittext.setText(date1);
                 Log.d(TAG, "onDateSelected: " + date1);
             }
-
             @Override
             public void onDateUnselected(Date date) {
 
@@ -238,6 +227,7 @@ public class SearchFragment extends Fragment {
     }
 
     public void OnRadioButton2Clicked(){
+        date2 = null; date1 = null;
         Log.d(TAG, "OnRadioButton2Clicked: " + "worked");
         date1Edittext.getText().clear();
         date2Edittext.getText().clear();

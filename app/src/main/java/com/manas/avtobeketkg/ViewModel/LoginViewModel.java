@@ -1,6 +1,7 @@
 package com.manas.avtobeketkg.ViewModel;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -38,7 +39,8 @@ public class LoginViewModel extends ViewModel {
                     liveUserResponse.setValue(response.body());
                     Log.d("aaa", "onResponse: " + "succes: " + response.body().getToken());
                 }
-                else Log.d("aaa", "onResponse: " + "unsucces: "  + response.code());
+                else {Log.d("aaa", "onResponse: " + "unsucces: "  + response.code());
+                liveUserResponse.setValue(response.body());}
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {

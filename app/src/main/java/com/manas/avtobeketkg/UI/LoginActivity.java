@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -56,24 +57,36 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 username = usernameeditText.getText().toString();
                 password = passwordEdittext.getText().toString();
-                username = "gulzats";
-                password = "jeenbekova98";
 
+
+                final ProgressDialog progressDoalog;
+                progressDoalog = new ProgressDialog(LoginActivity.this);
+                progressDoalog.setMessage("Its loading....");
+                progressDoalog.setTitle("Login");
+                progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                // show it
+                progressDoalog.show();
                 if(validateData(username,password)){
                     viewModel.getLoginResult(username,password).observe(LoginActivity.this, new Observer<User>() {
                         @Override
                         public void onChanged(User user) {
-                            if(user.getToken()!=null){
-                                Log.d("TAG", "not null: " + user.getToken());
-                                Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_SHORT).show();
+                            progressDoalog.dismiss();
 
-                                SharedPreferences.Editor editor = sharedpreferences.edit();
-                                editor.putString(Token, user.getToken());
-                                editor.commit();
+                                if(user.getSuccess()){
+                                    Toast.makeText(LoginActivity.this, "Login succes",Toast.LENGTH_SHORT).show();
 
-                                Intent i = new Intent(LoginActivity.this,NavigationActivity.class);
-                                startActivity(i);
-                            }
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                                    editor.putString(Token, user.getToken());
+                                    editor.commit();
+
+                                    Intent i = new Intent(LoginActivity.this,NavigationActivity.class);
+                                    startActivity(i);
+                                    finish();
+                                }
+                                else  Toast.makeText(LoginActivity.this, user.getMessage(),Toast.LENGTH_SHORT).show();
+
+
+
                         }
                     });
                 }
